@@ -1,0 +1,14 @@
+  
+{
+	"include": [
+		"$(MODDABLE)/examples/manifest_net.json",
+		"$(MODDABLE)/examples/manifest_typings.json"
+	],
+	"modules": {
+		"*": ["$(MODULES)/network/http/*"],
+		"requestPromise": "../core/requestPromise"
+	},
+	"preload": [
+		"http"
+	]
+}

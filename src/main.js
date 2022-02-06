@@ -1,0 +1,13 @@
+import client from "client";
+
+const http_get_json = "http://user"
+const http_get_html = "http://httpbin.org/html"
+const http_get_200 ="http://httpbin.org/status/200"
+const http_get_400 ="http://httpbin.org/status/400"
+const http_get_image_jpeg = "http://httpbin.org/image/jpeg"
+const http_get_image_png = "http://httpbin.org/image/png"
+
+
+client.request(http_get_json).then((response) => {
+  trace(`${JSON.stringify(response.data)}\n`);
+})
