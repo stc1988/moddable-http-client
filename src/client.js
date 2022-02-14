@@ -3,11 +3,19 @@ import { createDictionary, isStringResponse } from "util";
 
 class Client {
   async get(url, config) {
-    const _config = { ...config, method: "GET", body: false };
+    const _config = {
+      ...config,
+      method: "GET",
+      body: false,
+    };
     return this.request(url, _config);
   }
   async delete(url, config) {
-    const _config = { ...config, method: "DELETE", body: false };
+    const _config = {
+      ...config,
+      method: "DELETE",
+      body: false,
+    };
     return this.request(url, _config);
   }
 
@@ -29,11 +37,9 @@ class Client {
           response.status = Number(val1);
         } else if (Request.header === message) {
           response.headers[val1] = val2;
-          if (!request.response && val1 === "content-type" && isStringResponse(val2))
-            request.response = String;
+          if (!request.response && val1 === "content-type" && isStringResponse(val2)) request.response = String;
         } else if (Request.responseComplete === message) {
-          response.data =
-            response.headers["content-type"] === "application/json" ? JSON.parse(val1) : val1;
+          response.data = response.headers["content-type"] === "application/json" ? JSON.parse(val1) : val1;
 
           const status = response.status.toString();
           if (status.startsWith("2")) {

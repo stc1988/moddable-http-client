@@ -1,0 +1,21 @@
+{
+  "name": "moddable-http-client",
+  "version": "0.1.0",
+  "description": "http client for Moddable SDK",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stc1988/moddable-http-client.git"
+  },
+  "author": "Satoshi Tanaka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stc1988/moddable-http-client/issues"
+  },
+  "homepage": "https://github.com/stc1988/moddable-http-client#readme",
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
+}
