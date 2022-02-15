@@ -1,22 +1,10 @@
 import SecureSocket from "securesocket";
 
 function parseURL(url) {
-  const split = url.split("://");
-  let protocol = "https";
-  let host, path, _url;
-
-  if (split.length > 1) {
-    protocol = split[0];
-    _url = split[1];
-  } else {
-    _url = url;
-  }
-
-  let index = _url.indexOf("/");
-  host = index === -1 ? _url : _url.substring(0, index);
-  path = index === -1 ? "/" : _url.substring(index);
-
-  return { protocol, host, path };
+  const match = url.match(
+    /^((?<protocol>http[s]?):)?(\/\/((?<username>\w+)?(:(?<password>\w+))?@)?(?<host>[^\/\?:]+)(:(?<port>\d+))?)?(\/?(?<path>[^\/\?#][^\?#]*)?)?(\?([^#]+))?(#(\w*))?/u
+  );
+  return { ...match.groups };
 }
 
 function createDictionary(url, config) {
@@ -25,7 +13,7 @@ function createDictionary(url, config) {
 
   let dictionary = {
     host: _url.host,
-    path: _url.path,
+    path: "/" + _url.path,
     method: _config.method ?? "GET",
     response: _config.response,
     port: _config.port ?? _url.protocol === "http" ? 80 : 443,
