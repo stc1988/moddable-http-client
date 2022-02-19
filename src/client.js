@@ -3,25 +3,47 @@ import { createDictionary, isStringResponse } from "util";
 
 class Client {
   async get(url, config) {
+    return this.#requestNoData("GET", url, config);
+  }
+  async delete(url, config) {
+    return this.#requestNoData("DELETE", url, config);
+  }
+  async head(url, config) {
+    return this.#requestNoData("HEAD", url, config);
+  }
+  async options(url, config) {
+    return this.#requestNoData("OPTIONS", url, config);
+  }
+  async post(url, data, config) {
+    return this.#requestWithData("POST", url, data, config);
+  }
+  async put(url, data, config) {
+    return this.#requestWithData("PUT", url, data, config);
+  }
+  async patch(url, data, config) {
+    return this.#requestWithData("PATCH", url, data, config);
+  }
+
+  async #requestNoData(method, url, config) {
     const _config = {
       ...config,
-      method: "GET",
+      method: method,
       body: false,
     };
     return this.request(url, _config);
   }
-  async delete(url, config) {
+
+  async #requestWithData(method, url, data, config) {
     const _config = {
       ...config,
-      method: "DELETE",
-      body: false,
+      method: method,
+      body: data,
     };
     return this.request(url, _config);
   }
 
   request(url, config) {
     const dictionary = createDictionary(url, config);
-
     return new Promise((resolve, reject) => {
       let request = new Request(dictionary);
       let response = {
