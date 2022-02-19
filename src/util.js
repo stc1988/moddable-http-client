@@ -17,7 +17,7 @@ function createDictionary(url, config) {
     method: _config.method ?? "GET",
     response: _config.response,
     port: _config.port ?? _url.protocol === "http" ? 80 : 443,
-    headers: Object.entries(_config.headers).flat(),
+    headers: Array.isArray(_config.headers) ? Object.entries(_config.headers).flat() : [],
   };
 
   if (_url.protocol === "https") {
