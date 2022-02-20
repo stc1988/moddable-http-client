@@ -1,5 +1,7 @@
 import client from "client";
 
+const http_get = "http://httpbin.org/get"
+const http_get_params = "http://httpbin.org/get?a=1&b=2"
 const http_get_json = "http://httpbin.org/json";
 const http_get_html = "http://httpbin.org/html";
 const http_get_header = "http://httpbin.org/headers";
