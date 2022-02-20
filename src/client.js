@@ -1,5 +1,5 @@
 import { Request } from "http";
-import { createDictionary, isStringResponse } from "util";
+import { buildDictionary, isStringResponse } from "util";
 
 class Client {
   async get(url, config) {
@@ -43,7 +43,7 @@ class Client {
   }
 
   request(url, config) {
-    const dictionary = createDictionary(url, config);
+    const dictionary = buildDictionary(url, config);
     return new Promise((resolve, reject) => {
       let request = new Request(dictionary);
       let response = {

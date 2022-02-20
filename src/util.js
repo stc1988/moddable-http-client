@@ -7,27 +7,30 @@ function parseURL(url) {
   return { ...match.groups };
 }
 
-function createDictionary(url, config) {
-  const _url = parseURL(url);
-  const _config = { ...config };
-
+function buildPath(url, config) {
   let path = "/";
-  if (_url.path) {
-    path += _url.path;
+  if (url.path) {
+    path += url.path;
   }
-  if (_url.params) {
-    path += "?" + _url.params;
-  } else if (_config.params) {
+  if (url.params) {
+    path += "?" + url.params;
+  } else if (config.params) {
     path +=
       "?" +
-      Object.entries(_config.params)
+      Object.entries(config.params)
         .map((e) => `${e[0]}=${e[1]}`)
         .join("&");
   }
+  return path;
+}
+
+function buildDictionary(url, config) {
+  const _url = parseURL(url);
+  const _config = { ...config };
 
   let dictionary = {
     host: _url.host,
-    path: path,
+    path: buildPath(_url, _config),
     method: _config.method ?? "GET",
     response: _config.response,
     port: _config.port ?? _url.protocol === "http" ? 80 : 443,
@@ -48,4 +51,4 @@ function isStringResponse(contentTyoe) {
   return stringContentTypes.includes(contentTyoe);
 }
 
-export { createDictionary, isStringResponse };
+export { buildDictionary, isStringResponse };
